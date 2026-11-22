@@ -100,7 +100,7 @@ When 0, no border is showed."
   :group 'ddskk-posframe)
 
 (defface ddskk-posframe-border
-  '((t (:inherit default :background "gray50")))
+  '((t (:background "gray50")))
   "Face used by the ddskk-posframe's border."
   :group 'ddskk-posframe)
 
@@ -241,11 +241,11 @@ When 0, no border is showed."
                 vars)
           (eval
            `(progn
-              ,@(mapcar (lambda (elm) `(advice-add ',(car elm) :around ',(cdr elm))) advices)
+              ,@(mapcar (lambda (elm) `(advice-add #',(car elm) :around #',(cdr elm))) advices)
               ,@(mapcar (lambda (elm) `(setq-default ,(car elm) ',(cdr elm))) vars))))
       (eval
        `(progn
-          ,@(mapcar (lambda (elm) `(advice-remove ',(car elm) ',(cdr elm))) advices)
+          ,@(mapcar (lambda (elm) `(advice-remove #',(car elm) #',(cdr elm))) advices)
           ,@(mapcar (lambda (elm) `(setq-default ,(car elm) ',(cdr elm))) saved-vars))))))
 
 (provide 'ddskk-posframe)
